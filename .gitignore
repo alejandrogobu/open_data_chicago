@@ -1,0 +1,10 @@
+.venv
+.vscode
+.dlt
+logs
+dbt/profiles.yml
+dbt/.user.yml
+*.db
+# Archivos de caché de Python
+__pycache__/
+*.py[cod]

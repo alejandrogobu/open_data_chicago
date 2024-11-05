@@ -1,0 +1,6 @@
+dlt
+dlt[filesystem]
+dlt[parquet]
+duckdb
+pandas
+boto3
