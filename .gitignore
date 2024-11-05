@@ -1,6 +1,5 @@
 .venv
 .vscode
-.dlt
 logs
 dbt/profiles.yml
 dbt/.user.yml
