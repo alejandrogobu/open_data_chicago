@@ -4,6 +4,7 @@ logs
 dbt/profiles.yml
 dbt/.user.yml
 *.db
+.DS_Store
 # Archivos de caché de Python
 __pycache__/
 *.py[cod]
