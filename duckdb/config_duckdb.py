@@ -4,9 +4,7 @@ from dotenv import load_dotenv
 import os
 import time
 
-# ===========================
 # Project Path Configuration
-# ===========================
 
 # Get the root project path and the DuckDB database path
 project_root = Path(__file__).resolve().parent.parent
@@ -15,9 +13,7 @@ duckdb_root = Path(__file__).resolve().parent
 print(f"Project Root Path: {project_root}")
 print(f"DuckDB Path: {duckdb_root}")
 
-# ===========================
 # Load Environment Variables
-# ===========================
 
 # Load the .env configuration file located at the project root
 load_dotenv(f'{project_root}/config.env')
@@ -32,9 +28,7 @@ bucket_raw = os.getenv("bucket_raw")
 if not all([access_key_id, secret_access_key, account_id, bucket_raw]):
     raise EnvironmentError("Some environment variables are missing: ensure 'access_key_id', 'secret_access_key', 'account_id', and 'bucket_raw' are defined in config.env.")
 
-# ===========================
 # Connect to DuckDB and Execute Operations
-# ===========================
 
 # Use a context manager to ensure the connection is closed automatically
 with duckdb.connect(f'{duckdb_root}/chicago_crimes.db') as con:
@@ -61,9 +55,7 @@ with duckdb.connect(f'{duckdb_root}/chicago_crimes.db') as con:
     except Exception as e:
         print("Unexpected error occurred while creating the R2 secret:", e)
 
-    # ===========================
     # Execute Query to Test R2 Integration
-    # ===========================
     
     try:
         # Step 1: Create schema if it doesn't exist
