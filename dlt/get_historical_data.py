@@ -5,12 +5,12 @@ import requests
 import time
 import os
 
-# store timestamps without timezone adjustments
+# Store timestamps without timezone adjustments
 os.environ["DATA_WRITER__TIMESTAMP_TIMEZONE"] = ""
 
-# Definir las fechas de inicio y fin
-date_start = datetime.fromisoformat('2019-07-15T00:00:00')
-date_end = datetime.fromisoformat('2019-07-15T23:59:59')
+# Define start and end dates
+date_start = datetime.fromisoformat('2024-10-25T00:00:00')
+date_end = date_start + timedelta(hours=23, minutes=59, seconds=59)
 
 # Define a DLT resource to fetch crime data from the Chicago dataset API
 @dlt.resource(
@@ -24,21 +24,21 @@ def get_crimes(url):
     response.raise_for_status()        # Ensure the response status is OK
     yield response.json()
 
-# Bucle que suma un día a las fechas hasta que la fecha de inicio sea igual al día actual
+# Loop that adds a day to the dates until the start date equals the current day
 while date_start.date() != datetime.now().date():
      
-    # Sumar un día a cada fecha
+    # Add a day to each date
     date_start += timedelta(days=1)
     date_end += timedelta(days=1)
     
-    # Convertir las fechas a formato ISO 8601 con la "T"
+    # Convert dates to ISO 8601 format with "T"
     date_start_iso = date_start.isoformat()
     date_end_iso = date_end.isoformat()
     
-    # Generar la URL con las fechas en formato correcto
+    # Generate the URL with the dates in correct format
     url = f"https://data.cityofchicago.org/resource/crimes.json?$limit=20000000&$where=updated_on between '{date_start_iso}' and '{date_end_iso}'"
     
-    # Imprimir la URL
+    # Print the URL
     print(url)
 
     pipeline = dlt.pipeline(

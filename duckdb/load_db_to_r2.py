@@ -3,9 +3,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 
-# ===========================
 # Load Environment Variables
-# ===========================
 
 # Define project root and load environment variables
 project_root = Path(__file__).resolve().parent.parent
@@ -21,9 +19,7 @@ bucket_data = os.getenv("bucket_data")     # Bucket for processed data
 if not all([access_key_id, secret_access_key, endpoint_url, bucket_data]):
     raise EnvironmentError("Some environment variables are missing: ensure 'access_key_id', 'secret_access_key', 'endpoint_url' and 'bucket_data' are defined in config.env.")
 
-# ===========================
 # Configure the R2 Cloudflare Client
-# ===========================
 
 # Set up a session with R2 Cloudflare using the credentials
 session = boto3.session.Session()
@@ -35,9 +31,7 @@ s3 = session.client(
     region_name='auto'
 )
 
-# ===========================
 # Define File Path and Upload to R2
-# ===========================
 
 # Define the path of the file to upload
 duckdb_root = Path(__file__).resolve().parent
@@ -46,9 +40,7 @@ file_path = duckdb_root / 'chicago_crimes.db'  # Path to the file to upload
 # The object name in R2 will be the same as the file name
 object_name = file_path.name
 
-# ===========================
 # Upload File to R2
-# ===========================
 
 try:
     # Upload file to the specified R2 bucket
